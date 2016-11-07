@@ -41,8 +41,14 @@ class UrlRule extends Object implements UrlRuleInterface
         $this->currentLanguage = Language::getCurrent();
         $this->pathInfo = $request->getPathInfo();
 
-        if(($this->pathInfo == $this->articleRoute || $this->pathInfo == $this->categoryRoute)) {
-            throw new NotFoundHttpException();
+        if($this->pathInfo == $this->categoryRoute || $this->pathInfo == $this->articleRoute) {
+            Yii::$app->urlManager->language = $this->currentLanguage;
+            if($this->createUrl(Yii::$app->urlManager, $this->pathInfo, $request->getQueryParams())) {
+                throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
+            }
+            else if($this->pathInfo == $this->articleRoute && empty($request->getQueryParams()['id'])) {
+                throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
+            }
         }
 
         if(!empty($this->prefix)) {
@@ -63,14 +69,14 @@ class UrlRule extends Object implements UrlRuleInterface
             if($i === $this->routesCount - 1) {
                 if($article = $this->findArticleBySeoUrl($this->routes[$i], $categoryId, ['show' => true])) {
                     return [
-                        '/articles/article/index',
+                        '/' . $this->articleRoute,
                         ['id' => $article->id]
                     ];
                 }
                 else {
                     if($category = $this->findCategoryBySeoUrl($this->routes[$i], $categoryId, ['show' => true])) {
                         return [
-                            '/articles/category/index',
+                            '/' . $this->categoryRoute,
                             ['id' => $category->id]
                         ];
                     }
