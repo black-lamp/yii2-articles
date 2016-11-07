@@ -2,12 +2,13 @@
 use bl\articles\common\entities\CategoryTranslation;
 use bl\multilang\entities\Language;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $category CategoryTranslation */
 /* @var $languages Language[] */
 
-$this->title = 'Article categories list';
+$this->title = Yii::t('articles', 'Article categories list');
 ?>
 
 <div class="row">
@@ -15,32 +16,38 @@ $this->title = 'Article categories list';
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-list"></i>
-                <?= 'Categories list'?>
+                <?= Yii::t('articles', 'Categories list'); ?>
             </div>
             <div class="panel-body">
                 <table class="table table-hover">
                     <?php if(!empty($categories)): ?>
                         <thead>
                         <tr>
-                            <th class="col-md-3"><?= 'Name'?></th>
-                            <th class="col-md-2"><?= 'Parent name'?></th>
+                            <th class="col-md-3"><?= Yii::t('articles', 'Name'); ?></th>
+                            <th class="col-md-2"><?= Yii::t('articles', 'Parent category'); ?></th>
                             <?php if(count($languages) > 1): ?>
-                                <th class="col-lg-3"><?= 'Language' ?></th>
+                                <th class="col-lg-3"><?= Yii::t('articles', 'Language'); ?></th>
                             <?php endif; ?>
-                            <th class="text-center">Show</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th class="text-center"><?= Yii::t('articles', 'Show'); ?></th>
+                            <th><?= Yii::t('articles', 'Edit'); ?></th>
+                            <th><?= Yii::t('articles', 'Delete'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($categories as $category): ?>
                             <tr>
                                 <td>
-                                    <?= $category->translation->name ?>
+                                    <?= Html::a($category->translation->name, ['/articles/category/save',
+                                        'categoryId' => $category->id,
+                                        'languageId' => Language::getCurrent()->id
+                                    ]) ?>
                                 </td>
                                 <td>
                                     <?php if(!empty($category->parent)): ?>
-                                        <?= $category->parent->translation->name ?>
+                                        <?= Html::a($category->parent->translation->name, ['/articles/category/save',
+                                            'categoryId' => $category->id,
+                                            'languageId' => Language::getCurrent()->id
+                                        ]) ?>
                                     <?php endif; ?>
                                 </td>
                                 <td>
@@ -90,7 +97,7 @@ $this->title = 'Article categories list';
                     <?php endif; ?>
                 </table>
                 <a href="<?= Url::to(['/articles/category/save', 'languageId' => Language::getCurrent()->id])?>" class="btn btn-primary pull-right">
-                    <i class="fa fa-user-plus"></i> <?= 'Add' ?>
+                    <i class="fa fa-user-plus"></i> <?= Yii::t('articles', 'Add'); ?>
                 </a>
             </div>
         </div>

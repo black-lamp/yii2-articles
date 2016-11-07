@@ -2,35 +2,40 @@
 use bl\articles\common\entities\Article;
 use bl\multilang\entities\Language;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 
-/* @var $languages Language[] */
-/* @var $articles Article[] */
-$this->title = 'Articles';
+/**
+ * @var $languages Language[]
+ * @var $articles Article[]
+ *
+ */
+
+$this->title = Yii::t('articles', 'Articles');
 ?>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-list"></i>
-                <?= 'Articles list' ?>
+                <?= Yii::t('articles', 'Articles list') ?>
             </div>
             <div class="panel-body">
                 <table class="table table-hover">
                     <?php if (!empty($articles)): ?>
                         <thead>
                         <tr>
-                            <th class="col-lg-1"><?= 'Position' ?></th>
-                            <th class="col-lg-3"><?= 'Title' ?></th>
-                            <th class="col-lg-3"><?= 'Category' ?></th>
-                            <th class="col-lg-3"><?= 'Description' ?></th>
+                            <th class="col-lg-1"><?= Yii::t('articles', 'Position'); ?></th>
+                            <th class="col-lg-3"><?= Yii::t('articles', 'Title'); ?></th>
+                            <th class="col-lg-3"><?= Yii::t('articles', 'Category'); ?></th>
+                            <th class="col-lg-3"><?= Yii::t('articles', 'Description'); ?></th>
                             <?php if(count($languages) > 1): ?>
-                                <th class="col-lg-3"><?= 'Language' ?></th>
+                                <th class="col-lg-3"><?= Yii::t('articles', 'Language'); ?></th>
                             <?php endif; ?>
-                            <th>Show</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th><?= Yii::t('articles', 'Show'); ?></th>
+                            <th><?= Yii::t('articles', 'Edit'); ?></th>
+                            <th><?= Yii::t('articles', 'Delete'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,11 +55,17 @@ $this->title = 'Articles';
                                     </a>
                                 </td>
                                 <td>
-                                    <?= $article->translation->name ?>
+                                    <?= Html::a($article->translation->name, ['/articles/article/save',
+                                        'articleId' => $article->id,
+                                        'languageId' => Language::getCurrent()->id
+                                    ]) ?>
                                 </td>
                                 <td>
                                     <?php if(!empty($article->category)): ?>
-                                        <?= $article->category->translation->name ?>
+                                        <?= Html::a($article->category->translation->name, ['/articles/category/save',
+                                            'categoryId' => $article->category->id,
+                                            'languageId' => Language::getCurrent()->id
+                                        ]) ?>
                                     <?php endif; ?>
                                 </td>
                                 <td>
@@ -113,7 +124,7 @@ $this->title = 'Articles';
                 <!-- TODO: languageId -->
                 <a href="<?= Url::to(['/articles/article/save', 'languageId' => Language::getCurrent()->id]) ?>"
                    class="btn btn-primary pull-right">
-                    <i class="fa fa-user-plus"></i> <?= 'Add' ?>
+                    <i class="fa fa-user-plus"></i> <?= Yii::t('articles', 'Add'); ?>
                 </a>
             </div>
         </div>

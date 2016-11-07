@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 /* @var $article_translation ArticleTranslation */
 /* @var $categories Category[] */
 
-$this->title = 'Save article';
+$this->title = Yii::t('articles', 'Save article');
 ?>
 
 <?php $form = ActiveForm::begin(['method'=>'post']) ?>
@@ -50,9 +50,9 @@ $this->title = 'Save article';
                     </div>
                 <?php endif; ?>
                 <div class="form-group field-validarticleform-category_id required has-success">
-                    <label class="control-label" for="validarticleform-category_id"><?= 'Category' ?></label>
+                    <label class="control-label" for="validarticleform-category_id"><?= Yii::t('articles', 'Category'); ?></label>
                     <select id="article-category_id" class="form-control" name="Article[category_id]">
-                        <option value="">-- <?= 'Empty' ?> --</option>
+                        <option value="">-- <?= Yii::t('articles', 'Not selected'); ?> --</option>
                         <?php if(!empty($categories)): ?>
                             <?php foreach($categories as $category): ?>
                                 <option <?= $article->category_id == $category->id ? 'selected' : '' ?> value="<?= $category->id?>">
@@ -67,7 +67,7 @@ $this->title = 'Save article';
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->label('Name')
+                ])->label(Yii::t('articles', 'Name'));
                 ?>
 
                 <?= $form->field($article, 'color', [
@@ -75,7 +75,7 @@ $this->title = 'Save article';
                         'class' => 'form-control',
                         'type' => 'color'
                     ]
-                ])->label('Color')
+                ])->label(Yii::t('articles', 'Color'));
                 ?>
 
                 <?= $form->field($article_translation, 'short_text', [
@@ -99,7 +99,7 @@ $this->title = 'Save article';
                         'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                     ]
                 ])
-                    ->label('Short description' )
+                    ->label(Yii::t('articles', 'Short description' ));
                 ?>
                 <?= $form->field($article_translation, 'text', [
                     'inputOptions' => [
@@ -121,9 +121,9 @@ $this->title = 'Save article';
                         ],
                         'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
                     ]
-                ])->label('Full description')
+                ])->label(Yii::t('articles', 'Full description'));
                 ?>
-                <input type="submit" class="btn btn-primary pull-right" value="<?= 'Save' ?>">
+                <input type="submit" class="btn btn-primary pull-right" value="<?= Yii::t('articles', 'Save'); ?>">
             </div>
         </div>
     </div>
@@ -134,37 +134,37 @@ $this->title = 'Save article';
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-list"></i>
-                <?= 'Seo Data' ?>
+                <?= Yii::t('articles', 'Seo Data'); ?>
             </div>
             <div class="panel-body">
                 <?= $form->field($article_translation, 'seoUrl', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->label('Seo Url')
+                ])->label(Yii::t('articles', 'Seo Url'));
                 ?>
 
                 <?= $form->field($article_translation, 'seoTitle', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->label('Seo Title')
+                ])->label(Yii::t('articles', 'Seo Title'));
                 ?>
 
                 <?= $form->field($article_translation, 'seoDescription', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->textarea(['rows' => 3])->label('Seo Description')
+                ])->textarea(['rows' => 3])->label(Yii::t('articles', 'Seo Description'));
                 ?>
 
                 <?= $form->field($article_translation, 'seoKeywords', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->textarea(['rows' => 3])->label('Seo Keywords')
+                ])->textarea(['rows' => 3])->label(Yii::t('articles', 'Seo Keywords'));
                 ?>
-                <input type="submit" class="btn btn-primary pull-right" value="<?= 'Save' ?>">
+                <input type="submit" class="btn btn-primary pull-right" value="<?= Yii::t('articles', 'Save'); ?>">
             </div>
         </div>
     </div>
@@ -175,22 +175,22 @@ $this->title = 'Save article';
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-list"></i>
-                <?= 'Tech' ?>
+                <?= Yii::t('articles', 'Tech'); ?>
             </div>
             <div class="panel-body">
                 <?= $form->field($article, 'view', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->label('View Name')
+                ])->label(Yii::t('articles', 'View Name'));
                 ?>
                 <?= $form->field($article, 'key', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->label('Key')
+                ])->label(Yii::t('articles', 'Key'));
                 ?>
-                <input type="submit" class="btn btn-primary pull-right" value="<?= 'Save' ?>">
+                <input type="submit" class="btn btn-primary pull-right" value="<?= Yii::t('articles', 'Save'); ?>">
             </div>
         </div>
     </div>

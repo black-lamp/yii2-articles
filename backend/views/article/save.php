@@ -18,7 +18,7 @@ use yii\widgets\Pjax;
  * @var $categories Category[]
  */
 
-$this->title = 'Save article';
+$this->title = Yii::t('articles', 'Save article');
 
 TabsAsset::register($this);
 ?>
