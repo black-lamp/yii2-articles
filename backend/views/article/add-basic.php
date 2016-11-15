@@ -4,6 +4,7 @@ use bl\articles\common\entities\ArticleTranslation;
 use bl\articles\common\entities\Category;
 use bl\multilang\entities\Language;
 use dosamigos\tinymce\TinyMce;
+use kartik\date\DatePicker;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
@@ -49,34 +50,66 @@ $this->title = Yii::t('articles', 'Save article');
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <div class="form-group field-validarticleform-category_id required has-success">
-                    <label class="control-label" for="validarticleform-category_id"><?= Yii::t('articles', 'Category'); ?></label>
-                    <select id="article-category_id" class="form-control" name="Article[category_id]">
-                        <option value="">-- <?= Yii::t('articles', 'Not selected'); ?> --</option>
-                        <?php if(!empty($categories)): ?>
-                            <?php foreach($categories as $category): ?>
-                                <option <?= $article->category_id == $category->id ? 'selected' : '' ?> value="<?= $category->id?>">
-                                    <?= $category->getTranslation($selectedLanguage->id)->name ?>
-                                </option>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </select>
-                    <div class="help-block"></div>
-                </div>
-                <?= $form->field($article_translation, 'name', [
-                    'inputOptions' => [
-                        'class' => 'form-control'
-                    ]
-                ])->label(Yii::t('articles', 'Name'));
-                ?>
 
-                <?= $form->field($article, 'color', [
-                    'inputOptions' => [
-                        'class' => 'form-control',
-                        'type' => 'color'
-                    ]
-                ])->label(Yii::t('articles', 'Color'));
-                ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group field-validarticleform-category_id required has-success">
+                                    <label class="control-label"
+                                           for="validarticleform-category_id"><?= Yii::t('articles', 'Category'); ?></label>
+                                    <select id="article-category_id" class="form-control" name="Article[category_id]">
+                                        <option value="">-- <?= Yii::t('articles', 'Not selected'); ?> --</option>
+                                        <?php if (!empty($categories)): ?>
+                                            <?php foreach ($categories as $category): ?>
+                                                <option <?= $article->category_id == $category->id ? 'selected' : '' ?>
+                                                    value="<?= $category->id ?>">
+                                                    <?= $category->getTranslation($selectedLanguage->id)->name ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
+                                    <div class="help-block"></div>
+                                </div>
+
+                                <?= $form->field($article_translation, 'name', [
+                                    'inputOptions' => [
+                                        'class' => 'form-control'
+                                    ]
+                                ])->label(Yii::t('articles', 'Name'));
+                                ?>
+
+                                <?= $form->field($article, 'show')->checkbox(); ?>
+                            </div>
+
+                            <div class="col-md-6">
+                                <?= $form->field($article, 'color', [
+                                    'inputOptions' => [
+                                        'class' => 'form-control',
+                                        'type' => 'color'
+                                    ]
+                                ])->label(Yii::t('articles', 'Color')); ?>
+                                
+                                <?= $form->field($article, 'publish_at')->widget(DatePicker::className(), [
+                                    'pluginOptions' => [
+                                        'autoclose' => true,
+                                        'format' => 'yyyy-mm-dd',
+                                        'todayHighlight' => true,
+                                    ]
+                                ]); ?>
+
+    <!--                            --><?//= $form->field($article, 'publish_at', [
+    //                                'inputOptions' => [
+    //                                    'class' => 'form-control',
+    //                                    'type'=> 'date'
+    //                                ]
+    //                            ]); ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
                 <?= $form->field($article_translation, 'short_text', [
                     'inputOptions' => [
@@ -123,6 +156,7 @@ $this->title = Yii::t('articles', 'Save article');
                     ]
                 ])->label(Yii::t('articles', 'Full description'));
                 ?>
+
                 <input type="submit" class="btn btn-primary pull-right" value="<?= Yii::t('articles', 'Save'); ?>">
             </div>
         </div>

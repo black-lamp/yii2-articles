@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  * @property string $color
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $publish_at
  *
  * @property Category $category
  * @property ArticleTranslation[] $translations
@@ -56,9 +57,22 @@ class Article extends ActiveRecord
         return [
             ['category_id', 'number'],
             [['view', 'color'], 'string'],
-            ['key', 'unique']
+            ['key', 'unique'],
+            [['publish_at'], 'string']
         ];
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'publish_at' => Yii::t('articles', 'Publish date'),
+            'show' => Yii::t('articles', 'Show')
+        ];
+    }
+
 
     /**
      * @inheritdoc

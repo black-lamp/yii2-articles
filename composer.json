@@ -20,6 +20,7 @@
     "2amigos/yii2-tinymce-widget": "*",
 
     "yii2tech/ar-position": "*",
+    "kartik-v/yii2-widget-datepicker": "*",
     
     "black-lamp/yii2-multi-lang": "1.1.*",
     "black-lamp/yii2-seo": "0.1.*"
