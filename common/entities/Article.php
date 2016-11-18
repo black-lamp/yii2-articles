@@ -58,6 +58,7 @@ class Article extends ActiveRecord
             ['category_id', 'number'],
             [['view', 'color'], 'string'],
             ['key', 'unique'],
+            [['show'], 'boolean'],
             [['publish_at'], 'string']
         ];
     }
