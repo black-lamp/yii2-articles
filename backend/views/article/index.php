@@ -34,6 +34,7 @@ $this->title = Yii::t('articles', 'Articles');
                                 <th class="col-lg-3"><?= Yii::t('articles', 'Language'); ?></th>
                             <?php endif; ?>
                             <th><?= Yii::t('articles', 'Show'); ?></th>
+                            <th><?= Yii::t('articles', 'Publish date'); ?></th>
                             <th><?= Yii::t('articles', 'Edit'); ?></th>
                             <th><?= Yii::t('articles', 'Delete'); ?></th>
                         </tr>
@@ -54,12 +55,15 @@ $this->title = Yii::t('articles', 'Articles');
                                     ]) ?>" class="glyphicon glyphicon-arrow-down text-primary pull-left">
                                     </a>
                                 </td>
+
                                 <td>
                                     <?= Html::a($article->translation->name, ['/articles/article/save',
                                         'articleId' => $article->id,
                                         'languageId' => Language::getCurrent()->id
                                     ]) ?>
                                 </td>
+
+
                                 <td>
                                     <?php if(!empty($article->category)): ?>
                                         <?= Html::a($article->category->translation->name, ['/articles/category/save',
@@ -68,12 +72,14 @@ $this->title = Yii::t('articles', 'Articles');
                                         ]) ?>
                                     <?php endif; ?>
                                 </td>
+
                                 <td>
                                     <?= StringHelper::truncate(strip_tags($article->translation->short_text), 30, '...') ?>
                                 </td>
+
                                 <td>
                                     <?php if(count($languages) > 1): ?>
-                                        <?php $translations = ArrayHelper::index($article->translations, 'language_id') ?>
+                                        <?php $translations = ArrayHelper::index($article->translations, 'language_id') ?>  
                                         <?php foreach ($languages as $language): ?>
                                             <a href="<?= Url::to([
                                                 'save',
@@ -100,11 +106,13 @@ $this->title = Yii::t('articles', 'Articles');
                                     </a>
                                 </td>
 
+                                <td><?= $article->publish_at; ?></td>
+
                                 <td>
                                     <a href="<?= Url::to([
                                         'save',
                                         'articleId' => $article->id,
-                                        'languageId' => $article->translation->language->id
+                                        'languageId' => (!empty($article->translation->language->id)) ? $article->translation->language->id : Language::getCurrent()->id
                                     ])?>" class="glyphicon glyphicon-edit text-warning btn btn-default btn-sm">
                                     </a>
                                 </td>

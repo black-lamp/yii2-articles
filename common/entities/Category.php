@@ -24,6 +24,8 @@ use yii\db\ActiveRecord;
  *
  * @property CategoryTranslation[] $translations
  * @property CategoryTranslation $translation
+ * 
+ * @method TranslationBehavior getTranslation($languageId = null)
  */
 class Category extends ActiveRecord
 {

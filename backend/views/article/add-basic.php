@@ -8,11 +8,13 @@ use kartik\date\DatePicker;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-/* @var $languages Language[] */
-/* @var $selectedLanguage Language */
-/* @var $article Article */
-/* @var $article_translation ArticleTranslation */
-/* @var $categories Category[] */
+/**
+ * @var $languages Language[]
+ * @var $selectedLanguage Language
+ * @var $article Article
+ * @var $article_translation ArticleTranslation
+ * @var $categories Category[]
+ */
 
 $this->title = Yii::t('articles', 'Save article');
 ?>
@@ -63,9 +65,10 @@ $this->title = Yii::t('articles', 'Save article');
                                         <option value="">-- <?= Yii::t('articles', 'Not selected'); ?> --</option>
                                         <?php if (!empty($categories)): ?>
                                             <?php foreach ($categories as $category): ?>
-                                                <option <?= $article->category_id == $category->id ? 'selected' : '' ?>
-                                                    value="<?= $category->id ?>">
-                                                    <?= $category->getTranslation($selectedLanguage->id)->name ?>
+                                                <option <?= $article->category_id == $category->id ? 'selected' : '' ?> value="<?= $category->id ?>">
+                                                    <?= (!empty($category->getTranslation($selectedLanguage->id)->name)) 
+                                                        ? $category->getTranslation($selectedLanguage->id)->name 
+                                                        : ''; ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
