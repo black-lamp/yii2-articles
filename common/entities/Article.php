@@ -107,4 +107,17 @@ class Article extends ActiveRecord
 
         return $imagePath;
     }
+
+    /**
+     * @param $category
+     * @param $size
+     * @param bool $absolute
+     * @return string Image.
+     */
+    public function getImage($category, $size, $absolute = false) {
+        $dir = ($absolute) ? Yii::getAlias('@frontend/web/images/articles/') : '/images/articles/';
+        $image = $dir . $category . '/' . $this->$category . '-' . $size . '.jpg';
+
+        return $image;
+    }
 }
