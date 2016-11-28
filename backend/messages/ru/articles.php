@@ -1,0 +1,46 @@
+<?php
+/**
+ * @author Vyacheslav Nozhenko <vv.nojenko@gmail.com>
+ *
+ * Translations for Article Module.
+ */
+return [
+    'Add' => 'Добавить',
+    'Articles list' => 'Список статей',
+    'Basic' => 'Основные настройки',
+    'Categories list' => 'Список категорий',
+    'Category' => 'Категория',
+    'Color' => 'Цвет',
+    'Created' => 'Создано',
+    'Delete' => 'Удалить',
+    'Description' => 'Описание',
+    'Edit' => 'Редактировать',
+    'For social networks' => 'Для соцсетей',
+    'Full description' => 'Полное описание',
+    'Image' => 'Изображение',
+    'Image preview' => 'Миниатюра',
+    'Images' => 'Изображения',
+    'Image URL' => 'URL картинки',
+    'Language' => 'Язык',
+    'Menu item' => 'Пункт меню',
+    'Name' => 'Наименование',
+    'Not selected' => 'Не выбрана',
+    'Parent category' => 'Родительская категория',
+    'Position' => 'Позиция',
+    'Publish date' => 'Дата публикации',
+    'Save' => 'Сохранить',
+    'Seo Data' => 'SEO данные',
+    'Seo Description' => 'SEO описание',
+    'Seo Keywords' => 'SEO Ключевые слова',
+    'Seo Title' => 'SEO заглавие',
+    'Seo Url' => 'SEO URL (адрес)',
+    'Short description' => 'Краткое описание',
+    'Show' => 'Показывать',
+    'Show articles' => 'Показывать статьи',
+    'Thumbnail' => 'Миниатюра',
+    'Title' => 'Заголовок',
+    'Type' => 'Тип',
+    'Upload' => 'Загрузить с компьютера',
+    'Upload image' => 'Загрузить изображение',
+    'Without category' => 'Без категории',
+];
