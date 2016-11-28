@@ -1,5 +1,5 @@
 <?php
-namespace bl\articles\widgets;
+namespace bl\articles\common\widgets;
 
 use bl\articles\common\entities\Article;
 use yii\base\Widget;
@@ -23,12 +23,22 @@ class LastArticles extends Widget
      */
     public $count = 10;
 
+    /**
+     * @var string|array Condition for query.
+     */
+    public $condition = null;
+
     public function run()
     {
-        $articles = Article::find()
+        $query = Article::find()
             ->orderBy(['created_at' => SORT_DESC])
-            ->limit($this->count)
-            ->all();
+            ->limit($this->count);
+
+        if ($this->condition != null) {
+            $query->where($this->condition);
+        }
+
+        $articles = $query->all();
 
         return $this->render('last-articles', [
             'articles' => $articles
