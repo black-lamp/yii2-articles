@@ -3,14 +3,21 @@ namespace bl\articles\common\widgets;
 
 use bl\articles\common\entities\Article;
 use yii\base\Widget;
+use yii\db\Expression;
 
 /**
- * Widget shows last created Articles.
+ * Widget shows Articles.
  *
- * Example:
+ * For example:
  * ```php
- * <?= bl\articles\widgets\LastArticles::widget([
- *      'count' => 15
+ * <?= bl\articles\common\widgets\LastArticles::widget([
+ *      'count' => 15,
+ *      'condition' => [
+ *          ['show' => true],
+ *          ['<=', 'publish_at', date('Y-m-d')]
+ *      ],
+ *      'order' => ['updated_at' => SORT_DESC],
+ *      'view' => 'last-articles'
  * ]); ?>
  * ```
  *
@@ -24,25 +31,44 @@ class LastArticles extends Widget
     public $count = 10;
 
     /**
-     * @var string|array Condition for query.
+     * @var string|array|Expression Condition expression.
      */
-    public $condition = null;
+    public $condition = ['show' => true];
 
+    /**
+     * @var string|array|Expression Order expression.
+     */
+    public $order = ['created_at' => SORT_DESC];
+
+    /**
+     * @var string View name.
+     */
+    public $view = 'last-articles';
+
+    /**
+     * @inheritdoc
+     */
     public function run()
     {
+        /** @var \yii\db\ActiveQuery $query */
         $query = Article::find()
-            ->orderBy(['created_at' => SORT_DESC])
+            ->orderBy($this->order)
             ->limit($this->count);
 
-        if ($this->condition != null) {
-            $query->where($this->condition);
+        if (isset($this->condition[0])) {
+            if (is_array($this->condition[0])) {
+                foreach ($this->condition as $item) {
+                    $query->andWhere($item);
+                }
+            } else {
+                $query->where($this->condition);
+            }
         }
 
         $articles = $query->all();
 
-        return $this->render('last-articles', [
+        return $this->render($this->view, [
             'articles' => $articles
         ]);
     }
-
 }
