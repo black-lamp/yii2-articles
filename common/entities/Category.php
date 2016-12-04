@@ -3,6 +3,7 @@ namespace bl\articles\common\entities;
 
 use bl\multilang\behaviors\TranslationBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Category model
@@ -104,6 +105,28 @@ class Category extends ActiveRecord
     public function getChildren()
     {
         return $this->hasMany(Category::className(), ['parent_id' => 'id']);
+    }
+
+    /**
+     * @return array Children ids. 
+     */
+    public function getChildIds()
+    {
+        return ArrayHelper::getColumn(Category::findAll(['parent_id' => $this->id]), 'id');
+    }
+
+    /**
+     * @param string $key Category key. 
+     * @return array Children ids with self id.
+     */
+    public static function getCategoriesIdsByKey($key)
+    {
+        $category = Category::findOne(['key' => $key]);
+        $categories = Category::findAll(['parent_id' => $category->id]);
+        $categoriesIds = ArrayHelper::getColumn($categories, 'id');
+        $categoriesIds[] = $category->id;
+        
+        return $categoriesIds;
     }
 
     /**

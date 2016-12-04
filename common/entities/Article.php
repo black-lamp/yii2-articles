@@ -120,4 +120,9 @@ class Article extends ActiveRecord
 
         return $image;
     }
+
+    public function isToday()
+    {
+        return ($this->publish_at >= date('Y-m-d 00:00:00') && $this->publish_at <= date('Y-m-d 23:59:59'));
+    }
 }
