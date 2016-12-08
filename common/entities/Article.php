@@ -28,6 +28,7 @@ use yii\db\ActiveRecord;
  * @property Category $category
  * @property ArticleTranslation[] $translations
  * @property ArticleTranslation $translation
+ * @method ArticleTranslation getTranslation($languageId = null)
  */
 class Article extends ActiveRecord
 {

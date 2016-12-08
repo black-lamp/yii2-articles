@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property CategoryTranslation[] $translations
  * @property CategoryTranslation $translation
  * 
- * @method TranslationBehavior getTranslation($languageId = null)
+ * @method CategoryTranslation getTranslation($languageId = null)
  */
 class Category extends ActiveRecord
 {
@@ -122,11 +122,15 @@ class Category extends ActiveRecord
     public static function getCategoriesIdsByKey($key)
     {
         $category = Category::findOne(['key' => $key]);
-        $categories = Category::findAll(['parent_id' => $category->id]);
-        $categoriesIds = ArrayHelper::getColumn($categories, 'id');
-        $categoriesIds[] = $category->id;
+        if (!empty($category)) {
+            $categories = Category::findAll(['parent_id' => $category->id]);
+            $categoriesIds = ArrayHelper::getColumn($categories, 'id');
+            $categoriesIds[] = $category->id;
+
+            return $categoriesIds;
+        }
         
-        return $categoriesIds;
+        return null;
     }
 
     /**
