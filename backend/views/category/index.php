@@ -9,8 +9,10 @@ use yii\helpers\Url;
 /* @var $languages Language[] */
 
 $this->title = Yii::t('articles', 'Article categories list');
-?>
 
+$this->params['breadcrumbs'][] = Yii::t('articles', 'Articles');
+
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">

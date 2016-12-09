@@ -16,7 +16,6 @@ use yii\widgets\ActiveForm;
  * @var $categories Category[]
  */
 
-$this->title = Yii::t('articles', 'Save article');
 ?>
 
 <?php $form = ActiveForm::begin(['method'=>'post']) ?>

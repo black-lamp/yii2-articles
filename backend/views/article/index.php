@@ -13,6 +13,8 @@ use yii\helpers\Url;
  */
 
 $this->title = Yii::t('articles', 'Articles');
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-md-12">

@@ -10,6 +10,7 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 
 /**
+ * @var \yii\web\View $this
  * @var $image_form ArticleImageForm
  * @var $languages Language[]
  * @var $selectedLanguage Language
@@ -18,7 +19,15 @@ use yii\widgets\Pjax;
  * @var $categories Category[]
  */
 
-$this->title = Yii::t('articles', 'Save article');
+$this->title = Yii::t('articles', 'Edit article');
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('articles', 'Articles'),
+    'url' => ['/articles']
+];
+if (!empty($article->translation->name)) {
+    $this->params['breadcrumbs'][] = $article->translation->name;
+}
 
 TabsAsset::register($this);
 ?>
