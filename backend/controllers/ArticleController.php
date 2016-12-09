@@ -6,10 +6,10 @@ use bl\articles\backend\components\form\ArticleImageForm;
 use bl\articles\common\entities\Article;
 use bl\articles\common\entities\ArticleTranslation;
 use bl\articles\common\entities\Category;
-use bl\imagable\Imagable;
 use bl\multilang\entities\Language;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Inflector;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -32,9 +32,12 @@ class ArticleController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['save', 'add-basic',
-                            'add-images', 'delete-image',
-                            'up', 'down', 'switch-show'],
+                        'actions' => [
+                            'save', 'add-basic', 'add-images',
+                            'delete-image',
+                            'up', 'down', 'switch-show',
+                            'get-seo-url'
+                        ],
                         'roles' => ['editArticles'],
                         'allow' => true,
                     ],
@@ -81,6 +84,10 @@ class ArticleController extends Controller
 
             if ($article->validate() && $article_translation->validate()) {
                 $article->save();
+
+                if (empty($article_translation->seoUrl)) {
+                    $article_translation->seoUrl = Inflector::slug($article_translation->name);
+                }
                 $article_translation->article_id = $article->id;
                 $article_translation->language_id = $languageId;
                 $article_translation->save();
@@ -284,5 +291,10 @@ class ArticleController extends Controller
         }
 
         return $this->redirect(Url::to(['/articles/article']));
+    }
+
+    public function actionGetSeoUrl($name)
+    {
+        return Inflector::slug($name);
     }
 }

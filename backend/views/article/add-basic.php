@@ -9,6 +9,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
+ * @var \yii\web\View $this
  * @var $languages Language[]
  * @var $selectedLanguage Language
  * @var $article Article
@@ -173,7 +174,18 @@ use yii\widgets\ActiveForm;
                 <?= Yii::t('articles', 'Seo Data'); ?>
             </div>
             <div class="panel-body">
+                <?php $seoTitleTemplate = "{label}\n
+                        <div class=\"input-group\">
+                            {input}\n
+                            <span class=\"input-group-btn\">
+                                <button id='getSeoUrl' class=\"btn btn-primary\" type=\"button\">
+                                    <span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>
+                                </button>
+                            </span>
+                        </div>\n{hint}\n{error}"
+                ?>
                 <?= $form->field($article_translation, 'seoUrl', [
+                    'template' => $seoTitleTemplate,
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
@@ -233,3 +245,19 @@ use yii\widgets\ActiveForm;
 </div>
 
 <?php ActiveForm::end(); ?>
+
+<?php
+$this->registerJs('
+function getSeoUrl() {
+        var $name = $("#articletranslation-name");
+        $.ajax({
+            type: "GET",
+            url: "/admin/articles/article/get-seo-url",
+            data: {"name":$name.val()},
+            success: function (url) {
+                $("#articletranslation-seourl").val(url);
+            }
+        });
+    }
+    $("button#getSeoUrl").click(getSeoUrl);
+') ?>
