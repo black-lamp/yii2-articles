@@ -92,9 +92,12 @@ class ArticleController extends Controller
                 $article_translation->language_id = $languageId;
                 $article_translation->save();
                 Yii::$app->getSession()->setFlash('success', 'Data were successfully modified.');
-//                return $this->redirect(Url::toRoute('/articles/article'));
-            } else
+
+                return $this->redirect(['save', 'articleId' => $article->id, 'languageId' => $languageId]);
+            }
+            else {
                 Yii::$app->getSession()->setFlash('danger', 'Failed to change the record.');
+            }
         }
 
         return $this->render('save',
