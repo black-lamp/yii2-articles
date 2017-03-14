@@ -41,6 +41,8 @@ class ArticleController extends Controller
             }
         }
 
+        $article->updateViewCounter();
+
         return $this->render($articleView, [
             'article' => $article
         ]);

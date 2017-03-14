@@ -26,6 +26,8 @@ use yii\db\ActiveRecord;
  * @property integer $publish_at
  *
  * @property Category $category
+ * @property ArticleViewCount $viewCount
+ * @property ArticleViewCount[] $viewCounts
  * @property ArticleTranslation[] $translations
  * @property ArticleTranslation $translation
  * @method ArticleTranslation getTranslation($languageId = null)
@@ -120,6 +122,46 @@ class Article extends ActiveRecord
         $image = $dir . $category . '/' . $this->$category . '-' . $size . '.jpg';
 
         return $image;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|ArticleViewCount
+     */
+    public function getViewCount()
+    {
+        return $this->hasOne(ArticleViewCount::className(), ['article_id' => 'id'])
+            ->where(['viewer_id' => Yii::$app->user->id]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|ArticleViewCount|ArticleViewCount[]
+     */
+    public function getViewCounts()
+    {
+        return $this->hasMany(ArticleViewCount::className(), ['article_id' => 'id']);
+    }
+
+    /**
+     * Updates views counter.
+     *
+     * @return null|ArticleViewCount
+     */
+    public function updateViewCounter()
+    {
+        $userId = Yii::$app->user->id;
+        $viewCount = $this->viewCount;
+
+        if (!empty($viewCount)) {
+            $viewCount->updateCounters(['count' => 1]);
+        } else {
+            $viewCount = new ArticleViewCount();
+            $viewCount->article_id = $this->id;
+            $viewCount->viewer_id = $userId;
+            $viewCount->save();
+            $viewCount->updateCounters(['count' => 1]);
+        }
+
+        return $viewCount;
     }
 
     public function isToday()
