@@ -168,4 +168,17 @@ class Article extends ActiveRecord
     {
         return ($this->publish_at >= date('Y-m-d 00:00:00') && $this->publish_at <= date('Y-m-d 23:59:59'));
     }
+
+    /**
+     * Checks whether a article is published.
+     *
+     * @return bool
+     */
+    public function isPublished()
+    {
+        $currentTimestamp = date('Y-m-d 00:00:00');
+        $publishTimestamp = $this->publish_at;
+
+        return ($currentTimestamp >= $publishTimestamp);
+    }
 }
