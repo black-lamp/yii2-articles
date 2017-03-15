@@ -164,6 +164,16 @@ class Article extends ActiveRecord
         return $viewCount;
     }
 
+    /**
+     * Checks whether a article is viewed by current user.
+     *
+     * @return bool
+     */
+    public function isNew()
+    {
+        return (empty($this->viewCount));
+    }
+
     public function isToday()
     {
         return ($this->publish_at >= date('Y-m-d 00:00:00') && $this->publish_at <= date('Y-m-d 23:59:59'));
