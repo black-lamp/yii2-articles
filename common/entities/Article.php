@@ -130,7 +130,7 @@ class Article extends ActiveRecord
     public function getViewCount()
     {
         return $this->hasOne(ArticleViewCount::className(), ['article_id' => 'id'])
-            ->where(['viewer_id' => Yii::$app->user->id]);
+            ->onCondition(['{{article_view_count}}.viewer_id' => Yii::$app->user->id]);
     }
 
     /**
