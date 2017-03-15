@@ -186,9 +186,6 @@ class Article extends ActiveRecord
      */
     public function isPublished()
     {
-        $currentTimestamp = date('Y-m-d 00:00:00');
-        $publishTimestamp = $this->publish_at;
-
-        return ($currentTimestamp >= $publishTimestamp);
+        return (date('Y-m-d H:i:s') >= $this->publish_at);
     }
 }
