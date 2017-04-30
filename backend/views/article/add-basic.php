@@ -137,7 +137,8 @@ use yii\widgets\ActiveForm;
                             ['title' => 'None', 'value' => ''],
                             ['title' => 'Article big', 'value' => 'article-img big'],
                             ['title' => 'Article small', 'value' => 'article-img small'],
-                        ]
+                        ],
+                        'image_advtab' => true
                     ]
                 ])
                     ->label(Yii::t('articles', 'Short description' ));
@@ -160,12 +161,13 @@ use yii\widgets\ActiveForm;
                             "insertdatetime media table contextmenu paste",
                             'image'
                         ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",,
+                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
                         'image_class_list' => [
                             ['title' => 'None', 'value' => ''],
                             ['title' => 'Article big', 'value' => 'article-img big'],
                             ['title' => 'Article small', 'value' => 'article-img small'],
-                        ]
+                        ],
+                        'image_advtab' => true
                     ]
                 ])->label(Yii::t('articles', 'Full description'));
                 ?>
