@@ -7,10 +7,19 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'bl\articles\backend\controllers';
     public $defaultRoute = 'article';
 
+    public $tabs = [];
+
     public function init()
     {
         parent::init();
+        $this->registerTabs();
         $this->registerTranslations();
+    }
+
+    public function registerTabs() {
+        foreach ($this->tabs as $tabTitle => $tabData) {
+            $this->controllerMap[$tabTitle] = $tabData['controller'];
+        }
     }
 
     public function registerTranslations()

@@ -29,16 +29,27 @@ if (!empty($article->translation->name)) {
     $this->params['breadcrumbs'][] = $article->translation->name;
 }
 
+$tabs = Yii::$app->getModule('articles')->tabs;
+
 TabsAsset::register($this);
 ?>
 
 <ul class="tabs">
     <li>
-        <?=Html::a(Yii::t('articles', 'Basic'), Url::to(['add-basic',  'articleId' => $article->id, 'languageId' => $languageId]), ['class' => 'image']);?>
+        <?=Html::a(Yii::t('articles', 'Basic'), Url::to(['//articles/article/add-basic',  'articleId' => $article->id, 'languageId' => $languageId]), ['class' => 'image']);?>
     </li>
     <li>
-        <?=Html::a(Yii::t('articles', 'Images'), Url::to(['add-images',  'articleId' => $article->id, 'languageId' => $languageId]), ['class' => 'image']);?>
+        <?=Html::a(Yii::t('articles', 'Images'), Url::to(['//articles/article/add-images',  'articleId' => $article->id, 'languageId' => $languageId]), ['class' => 'image']);?>
     </li>
+
+
+    <?php if(!empty($article) && !empty($article->id)): ?>
+        <?php foreach ($tabs as $tabKey => $tab): ?>
+            <li>
+                <?=Html::a(Yii::t('articles', $tab['title']), Url::to(['//articles/' . $tabKey,  'articleId' => $article->id, 'languageId' => $languageId]), ['class' => 'image']);?>
+            </li>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </ul>
 
 
