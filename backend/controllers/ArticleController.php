@@ -57,7 +57,7 @@ class ArticleController extends Controller
         return $this->render('index', [
             'articles' => Article::find()
                 ->with(['category', 'category.translations', 'translations'])
-                ->orderBy(['position' => SORT_ASC])
+                ->orderBy(['category_id' => SORT_ASC, 'position' => SORT_ASC])
                 ->all(),
             'languages' => Language::findAll(['active' => true])
         ]);

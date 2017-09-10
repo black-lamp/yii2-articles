@@ -97,7 +97,7 @@ use yii\widgets\ActiveForm;
                                 <?= $form->field($article, 'publish_at')->widget(DatePicker::className(), [
                                     'pluginOptions' => [
                                         'autoclose' => true,
-                                        'format' => 'yyyy-mm-dd',
+                                        'format' => 'dd-mm-yyyy',
                                         'todayHighlight' => true,
                                     ]
                                 ]); ?>

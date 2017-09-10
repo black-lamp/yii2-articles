@@ -34,6 +34,15 @@ use yii\db\ActiveRecord;
  */
 class Article extends ActiveRecord
 {
+    public function init()
+    {
+        parent::init();
+        if($this->isNew()) {
+            $this->publish_at = date('d-m-Y', time());
+        }
+    }
+
+
     public function behaviors()
     {
         return [
@@ -45,6 +54,9 @@ class Article extends ActiveRecord
             'positionBehavior' => [
                 'class' => PositionBehavior::className(),
                 'positionAttribute' => 'position',
+                'groupAttributes' => [
+                    'category_id'
+                ],
             ],
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
