@@ -38,7 +38,7 @@ class Article extends ActiveRecord
     {
         parent::init();
         if($this->isNew()) {
-            $this->publish_at = date('d-m-Y', time());
+            $this->publish_at = date('Y-m-d', time());
         }
     }
 
