@@ -164,14 +164,17 @@ class UrlRule extends Object implements UrlRuleInterface
             $id = $params['id'];
             $pathInfo = '';
             $parentId = null;
-            $language = Language::findOne([
+            /*$language = Language::findOne([
                 'lang_id' => $manager->language
-            ]);
+            ]);*/
 
             if($route == $this->articleRoute) {
-                $article = Article::findOne($id);
-                if($article->getTranslation($language->id) && $article->getTranslation($language->id)->seoUrl) {
-                    $pathInfo = $article->getTranslation($language->id)->seoUrl;
+                $article = Article::find()
+                    ->where(['id' => $id])
+                    ->with('translation')
+                    ->one();
+                if($article->translation && $article->translation->seoUrl) {
+                    $pathInfo = $article->translation->seoUrl;
                     $parentId = $article->category_id;
                 }
                 else {
@@ -179,9 +182,12 @@ class UrlRule extends Object implements UrlRuleInterface
                 }
             }
             else if($route == $this->categoryRoute) {
-                $category = Category::findOne($id);
-                if($category->getTranslation($language->id) && $category->getTranslation($language->id)->seoUrl) {
-                    $pathInfo = $category->getTranslation($language->id)->seoUrl;
+                $category = Category::find()
+                    ->where(['id' => $id])
+                    ->with('translation')
+                    ->one();
+                if($category->translation && $category->translation->seoUrl) {
+                    $pathInfo = $category->translation->seoUrl;
                     $parentId = $category->parent_id;
                 }
                 else {
@@ -191,8 +197,8 @@ class UrlRule extends Object implements UrlRuleInterface
 
             while($parentId != null) {
                 $category = Category::findOne($parentId);
-                if($category->getTranslation($language->id) && $category->getTranslation($language->id)->seoUrl) {
-                    $pathInfo = $category->getTranslation($language->id)->seoUrl . '/' . $pathInfo;
+                if($category->translation && $category->translation->seoUrl) {
+                    $pathInfo = $category->translation->seoUrl . '/' . $pathInfo;
                     $parentId = $category->parent_id;
                 }
                 else {
