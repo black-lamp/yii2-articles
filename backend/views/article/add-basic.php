@@ -66,8 +66,8 @@ use yii\widgets\ActiveForm;
                                         <?php if (!empty($categories)): ?>
                                             <?php foreach ($categories as $category): ?>
                                                 <option <?= $article->category_id == $category->id ? 'selected' : '' ?> value="<?= $category->id ?>">
-                                                    <?= (!empty($category->getTranslation($selectedLanguage->id)->name)) 
-                                                        ? $category->getTranslation($selectedLanguage->id)->name 
+                                                    <?= (!empty($category->getTranslation($selectedLanguage->id)->one()->name))
+                                                        ? $category->getTranslation($selectedLanguage->id)->one()->name
                                                         : ''; ?>
                                                 </option>
                                             <?php endforeach; ?>
