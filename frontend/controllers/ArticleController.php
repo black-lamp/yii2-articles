@@ -2,6 +2,7 @@
 namespace bl\articles\frontend\controllers;
 
 use bl\articles\common\entities\Article;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -27,6 +28,13 @@ class ArticleController extends Controller
         $this->view->registerMetaTag([
             'name' => 'keywords',
             'content' => html_entity_decode($articleTranslation->seoKeywords)
+        ]);
+        $this->view->registerLinkTag([
+            'rel' => 'canonical',
+            'href' => Url::to([
+                '/articles/article/index',
+                'id' => $article->id
+            ])
         ]);
 
         // default view name

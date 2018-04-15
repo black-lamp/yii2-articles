@@ -2,6 +2,7 @@
 namespace bl\articles\frontend\controllers;
 
 use bl\articles\common\entities\Category;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -28,6 +29,13 @@ class CategoryController extends Controller
         $this->view->registerMetaTag([
             'name' => 'keywords',
             'content' => html_entity_decode($categoryTranslation->seoKeywords)
+        ]);
+        $this->view->registerLinkTag([
+            'rel' => 'canonical',
+            'href' => Url::to([
+                '/articles/category/index',
+                'id' => $category->id
+            ])
         ]);
 
         return $this->render(!empty($category->view) ? $category->view : 'index', [
