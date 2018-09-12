@@ -33,6 +33,7 @@ return [
     'Edit article' => 'Редагувати статтю',
     'For social networks' => 'Для соцмереж',
     'Full description' => 'Повний опис',
+    'Seo text' => 'SEO текст',
     'Image' => '@@Зображення@@',
     'Image URL' => 'URL картинки',
     'Image preview' => 'Мініатюра',
