@@ -1,4 +1,5 @@
 <?php
+
 use bl\articles\common\entities\Category;
 use bl\articles\common\entities\CategoryTranslation;
 use dosamigos\tinymce\TinyMce;
@@ -30,23 +31,24 @@ $this->title = Yii::t('articles', 'Category');
                     <?= Yii::t('articles', 'Category'); ?>
                 </div>
                 <div class="panel-body">
-                    <?php if(count($languages) > 1): ?>
+                    <?php if (count($languages) > 1): ?>
                         <div class="dropdown">
-                            <button class="btn btn-warning btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <button class="btn btn-warning btn-xs dropdown-toggle" type="button" id="dropdownMenu1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <?= $selectedLanguage->name ?>
                                 <span class="caret"></span>
                             </button>
-                            <?php if(count($languages) > 1): ?>
+                            <?php if (count($languages) > 1): ?>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <?php foreach($languages as $language): ?>
+                                    <?php foreach ($languages as $language): ?>
                                         <li>
                                             <a href="
                                             <?= Url::to([
                                                 'save',
                                                 'categoryId' => $category->id,
-                                                'languageId' => $language->id])?>
+                                                'languageId' => $language->id]) ?>
                                             ">
-                                                <?= $language->name?>
+                                                <?= $language->name ?>
                                             </a>
                                         </li>
                                     <?php endforeach; ?>
@@ -55,12 +57,14 @@ $this->title = Yii::t('articles', 'Category');
                         </div>
                     <?php endif; ?>
                     <div class="form-group field-toolscategoryform-parent has-success">
-                        <label class="control-label" for="toolscategoryform-parent"><?= Yii::t('articles', 'Parent category'); ?></label>
+                        <label class="control-label"
+                               for="toolscategoryform-parent"><?= Yii::t('articles', 'Parent category'); ?></label>
                         <select id="category-parent_id" class="form-control" name="Category[parent_id]">
                             <option value="">-- <?= Yii::t('articles', 'Not selected'); ?> --</option>
-                            <?php if(!empty($categories)): ?>
-                                <?php foreach($categories as $cat): ?>
-                                    <option <?= $category->parent_id == $cat->id ? 'selected' : '' ?> value="<?= $cat->id?>">
+                            <?php if (!empty($categories)): ?>
+                                <?php foreach ($categories as $cat): ?>
+                                    <option <?= $category->parent_id == $cat->id ? 'selected' : '' ?>
+                                            value="<?= $cat->id ?>">
                                         <?= $cat->translation->name; ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -98,7 +102,8 @@ $this->title = Yii::t('articles', 'Category');
                                 "insertdatetime media table contextmenu paste",
                                 'image'
                             ],
-                            'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                            'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                            'images_upload_url' => Url::to(['article/upload-image'])
                         ]
                     ])->label(Yii::t('articles', 'Short description'));
                     ?>
@@ -117,7 +122,8 @@ $this->title = Yii::t('articles', 'Category');
                                 "insertdatetime media table contextmenu paste",
                                 'image'
                             ],
-                            'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                            'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                            'images_upload_url' => Url::to(['article/upload-image'])
                         ]
                     ])->label(Yii::t('articles', 'Full description'));
                     ?>

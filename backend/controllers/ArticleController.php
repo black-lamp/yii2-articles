@@ -36,7 +36,8 @@ class ArticleController extends Controller
                             'save', 'add-basic', 'add-images',
                             'delete-image',
                             'up', 'down', 'switch-show',
-                            'get-seo-url'
+                            'get-seo-url',
+                            'upload-image'
                         ],
                         'roles' => ['editArticles'],
                         'allow' => true,
@@ -299,5 +300,16 @@ class ArticleController extends Controller
     public function actionGetSeoUrl($name)
     {
         return Inflector::slug($name);
+    }
+
+    public function actionUploadImage() {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $file = UploadedFile::getInstanceByName('file');
+        $fileLocation = '/images/articles/intext/' . uniqid(hash('crc32', $file->baseName)) . '.' . $file->extension;
+        $filename = \Yii::getAlias('@frontend/web' . $fileLocation);
+        $file->saveAs($filename);
+
+        return ['location' => $fileLocation];
     }
 }

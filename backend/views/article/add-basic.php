@@ -138,7 +138,8 @@ use yii\widgets\ActiveForm;
                             ['title' => 'Article big', 'value' => 'article-img big'],
                             ['title' => 'Article small', 'value' => 'article-img small'],
                         ],
-                        'image_advtab' => true
+                        'image_advtab' => true,
+                        'images_upload_url' => Url::to(['article/upload-image'])
                     ]
                 ])
                     ->label(Yii::t('articles', 'Short description' ));
@@ -167,7 +168,8 @@ use yii\widgets\ActiveForm;
                             ['title' => 'Article big', 'value' => 'article-img big'],
                             ['title' => 'Article small', 'value' => 'article-img small'],
                         ],
-                        'image_advtab' => true
+                        'image_advtab' => true,
+                        'images_upload_url' => Url::to(['article/upload-image'])
                     ]
                 ])->label(Yii::t('articles', 'Full description'));
                 ?>
@@ -196,7 +198,8 @@ use yii\widgets\ActiveForm;
                             ['title' => 'Article big', 'value' => 'article-img big'],
                             ['title' => 'Article small', 'value' => 'article-img small'],
                         ],
-                        'image_advtab' => true
+                        'image_advtab' => true,
+                        'images_upload_url' => Url::to(['article/upload-image'])
                     ]
                 ])
                     ->label(Yii::t('articles', 'Seo text' ));
