@@ -58,6 +58,29 @@ use yii\widgets\ActiveForm;
                         <div class="row">
 
                             <div class="col-md-6">
+                                <?= $form->field($article_translation, 'name', [
+                                    'inputOptions' => [
+                                        'class' => 'form-control'
+                                    ]
+                                ])->label(Yii::t('articles', 'Name'));
+                                ?>
+                                <?= $form->field($article_translation, 'menu_title', [
+                                    'inputOptions' => [
+                                        'class' => 'form-control'
+                                    ]
+                                ])->label(Yii::t('articles', 'Menu Title'));
+                                ?>
+                                <?= $form->field($article_translation, 'short_title', [
+                                    'inputOptions' => [
+                                        'class' => 'form-control'
+                                    ]
+                                ])->label(Yii::t('articles', 'Short Title'));
+                                ?>
+
+                                <?= $form->field($article, 'show')->checkbox(); ?>
+                            </div>
+
+                            <div class="col-md-6">
                                 <div class="form-group field-validarticleform-category_id required has-success">
                                     <label class="control-label"
                                            for="validarticleform-category_id"><?= Yii::t('articles', 'Category'); ?></label>
@@ -75,18 +98,6 @@ use yii\widgets\ActiveForm;
                                     </select>
                                     <div class="help-block"></div>
                                 </div>
-
-                                <?= $form->field($article_translation, 'name', [
-                                    'inputOptions' => [
-                                        'class' => 'form-control'
-                                    ]
-                                ])->label(Yii::t('articles', 'Name'));
-                                ?>
-
-                                <?= $form->field($article, 'show')->checkbox(); ?>
-                            </div>
-
-                            <div class="col-md-6">
                                 <?= $form->field($article, 'color', [
                                     'inputOptions' => [
                                         'class' => 'form-control',
@@ -132,7 +143,7 @@ use yii\widgets\ActiveForm;
                             "insertdatetime media table contextmenu paste",
                             'image'
                         ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
                         'image_class_list' => [
                             ['title' => 'None', 'value' => ''],
                             ['title' => 'Article big', 'value' => 'article-img big'],
@@ -162,7 +173,7 @@ use yii\widgets\ActiveForm;
                             "insertdatetime media table contextmenu paste",
                             'image'
                         ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
                         'image_class_list' => [
                             ['title' => 'None', 'value' => ''],
                             ['title' => 'Article big', 'value' => 'article-img big'],
@@ -172,6 +183,35 @@ use yii\widgets\ActiveForm;
                         'images_upload_url' => Url::to(['article/upload-image'])
                     ]
                 ])->label(Yii::t('articles', 'Full description'));
+                ?>
+                <?= $form->field($article_translation, 'semi_text', [
+                    'inputOptions' => [
+                        'class' => 'form-control'
+                    ]
+                ])->widget(TinyMce::className(), [
+                    'options' => ['rows' => 20],
+                    'language' => 'ru',
+                    'clientOptions' => [
+                        'relative_urls' => true,
+//                        'remove_script_host' => false,
+                        'verify_html' => false,
+                        'plugins' => [
+                            'textcolor colorpicker',
+                            "advlist autolink lists link charmap print preview anchor",
+                            "searchreplace visualblocks code fullscreen",
+                            "insertdatetime media table contextmenu paste",
+                            'image'
+                        ],
+                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
+                        'image_class_list' => [
+                            ['title' => 'None', 'value' => ''],
+                            ['title' => 'Article big', 'value' => 'article-img big'],
+                            ['title' => 'Article small', 'value' => 'article-img small'],
+                        ],
+                        'image_advtab' => true,
+                        'images_upload_url' => Url::to(['article/upload-image'])
+                    ]
+                ])->label(Yii::t('articles', 'Additional description'));
                 ?>
 
                 <?= $form->field($article_translation, 'seo_text', [
@@ -192,7 +232,7 @@ use yii\widgets\ActiveForm;
                             "insertdatetime media table contextmenu paste",
                             'image'
                         ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
                         'image_class_list' => [
                             ['title' => 'None', 'value' => ''],
                             ['title' => 'Article big', 'value' => 'article-img big'],

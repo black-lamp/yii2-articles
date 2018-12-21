@@ -15,9 +15,12 @@ use yii\db\ActiveRecord;
  * @property integer $article_id
  * @property integer $language_id
  * @property string $name
+ * @property string $short_title
+ * @property string $semi_title
  * @property string $text
  * @property string $short_text
  * @property string $seo_text
+ * @property string $semi_text
  *
  * @property Language $language
  */
@@ -37,6 +40,7 @@ class ArticleTranslation extends ActiveRecord
         return [
             [['language_id', 'article_id'], 'number'],
             [['name', 'text', 'short_text', 'seo_text'], 'string'],
+            [['menu_title', 'short_title', 'semi_text'], 'string'],
             // seo data
             [['seoUrl', 'seoTitle', 'seoDescription', 'seoKeywords'], 'string']
         ];
