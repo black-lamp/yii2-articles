@@ -17,6 +17,57 @@ use yii\widgets\ActiveForm;
  * @var $categories Category[]
  */
 
+$tinyMceConfig = [
+    'options' => ['rows' => 20],
+    'language' => 'ru',
+    'clientOptions' => [
+        'relative_urls' => true,
+//                        'remove_script_host' => false,
+        'verify_html' => false,
+        'plugins' => [
+            'textcolor colorpicker',
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste",
+            'image'
+        ],
+        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
+        'image_class_list' => [
+            ['title' => 'None', 'value' => ''],
+            ['title' => 'Article big', 'value' => 'article-img big'],
+            ['title' => 'Article small', 'value' => 'article-img small'],
+        ],
+        'style_formats' => [
+            [
+                'title' => 'Float Left',
+                'selector' => 'img',
+                'styles' => [
+                    'float' => 'left',
+                    'margin' => '0 10px 0 10px'
+                ]
+            ],
+            [
+                'title' => 'Float Right',
+                'selector' => 'img',
+                'styles' => [
+                    'float' => 'right',
+                    'margin' => '0 0 10px 10px'
+                ]
+            ],
+            [
+                'title' => 'Float None',
+                'selector' => 'img',
+                'styles' => [
+                    'float' => 'none',
+                    'margin' => '0'
+                ]
+            ],
+        ],
+        'image_advtab' => true,
+        'images_upload_url' => Url::to(['article/upload-image'])
+    ]
+];
+
 ?>
 
 <?php $form = ActiveForm::begin(['method'=>'post']) ?>
@@ -129,119 +180,29 @@ use yii\widgets\ActiveForm;
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), [
-                    'options' => ['rows' => 10],
-                    'language' => 'ru',
-                    'clientOptions' => [
-                        'relative_urls' => true,
-                        'remove_script_host' => false,
-                        'verify_html' => false,
-                        'plugins' => [
-                            'textcolor colorpicker',
-                            "advlist autolink lists link charmap print preview anchor",
-                            "searchreplace visualblocks code fullscreen",
-                            "insertdatetime media table contextmenu paste",
-                            'image'
-                        ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
-                        'image_class_list' => [
-                            ['title' => 'None', 'value' => ''],
-                            ['title' => 'Article big', 'value' => 'article-img big'],
-                            ['title' => 'Article small', 'value' => 'article-img small'],
-                        ],
-                        'image_advtab' => true,
-                        'images_upload_url' => Url::to(['article/upload-image'])
-                    ]
-                ])
+                ])->widget(TinyMce::className(), $tinyMceConfig)
                     ->label(Yii::t('articles', 'Short description' ));
                 ?>
                 <?= $form->field($article_translation, 'text', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), [
-                    'options' => ['rows' => 20],
-                    'language' => 'ru',
-                    'clientOptions' => [
-                        'relative_urls' => true,
-//                        'remove_script_host' => false,
-                        'verify_html' => false,
-                        'plugins' => [
-                            'textcolor colorpicker',
-                            "advlist autolink lists link charmap print preview anchor",
-                            "searchreplace visualblocks code fullscreen",
-                            "insertdatetime media table contextmenu paste",
-                            'image'
-                        ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
-                        'image_class_list' => [
-                            ['title' => 'None', 'value' => ''],
-                            ['title' => 'Article big', 'value' => 'article-img big'],
-                            ['title' => 'Article small', 'value' => 'article-img small'],
-                        ],
-                        'image_advtab' => true,
-                        'images_upload_url' => Url::to(['article/upload-image'])
-                    ]
-                ])->label(Yii::t('articles', 'Full description'));
+                ])->widget(TinyMce::className(), $tinyMceConfig)
+                    ->label(Yii::t('articles', 'Full description'));
                 ?>
                 <?= $form->field($article_translation, 'semi_text', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), [
-                    'options' => ['rows' => 20],
-                    'language' => 'ru',
-                    'clientOptions' => [
-                        'relative_urls' => true,
-//                        'remove_script_host' => false,
-                        'verify_html' => false,
-                        'plugins' => [
-                            'textcolor colorpicker',
-                            "advlist autolink lists link charmap print preview anchor",
-                            "searchreplace visualblocks code fullscreen",
-                            "insertdatetime media table contextmenu paste",
-                            'image'
-                        ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
-                        'image_class_list' => [
-                            ['title' => 'None', 'value' => ''],
-                            ['title' => 'Article big', 'value' => 'article-img big'],
-                            ['title' => 'Article small', 'value' => 'article-img small'],
-                        ],
-                        'image_advtab' => true,
-                        'images_upload_url' => Url::to(['article/upload-image'])
-                    ]
-                ])->label(Yii::t('articles', 'Additional description'));
+                ])->widget(TinyMce::className(), $tinyMceConfig)
+                    ->label(Yii::t('articles', 'Additional description'));
                 ?>
 
                 <?= $form->field($article_translation, 'seo_text', [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), [
-                    'options' => ['rows' => 10],
-                    'language' => 'ru',
-                    'clientOptions' => [
-                        'relative_urls' => true,
-                        'remove_script_host' => false,
-                        'verify_html' => false,
-                        'plugins' => [
-                            'textcolor colorpicker',
-                            "advlist autolink lists link charmap print preview anchor",
-                            "searchreplace visualblocks code fullscreen",
-                            "insertdatetime media table contextmenu paste",
-                            'image'
-                        ],
-                        'toolbar' => "undo redo | forecolor backcolor | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link unlink image | code",
-                        'image_class_list' => [
-                            ['title' => 'None', 'value' => ''],
-                            ['title' => 'Article big', 'value' => 'article-img big'],
-                            ['title' => 'Article small', 'value' => 'article-img small'],
-                        ],
-                        'image_advtab' => true,
-                        'images_upload_url' => Url::to(['article/upload-image'])
-                    ]
-                ])
+                ])->widget(TinyMce::className(), $tinyMceConfig)
                     ->label(Yii::t('articles', 'Seo text' ));
                 ?>
 
