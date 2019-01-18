@@ -34,7 +34,7 @@ class ArticleController extends Controller
             'href' => Url::to([
                 '/articles/article/index',
                 'id' => $article->id
-            ])
+            ], true)
         ]);
 
         // default view name
