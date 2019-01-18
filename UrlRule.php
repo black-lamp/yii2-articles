@@ -173,7 +173,9 @@ class UrlRule extends BaseObject implements UrlRuleInterface
                     ->where(['id' => $id])
                     ->with('translation')
                     ->one();
-                if($article->translation && $article->translation->seoUrl) {
+                if ($article->key == 'main') {
+                    $pathInfo = '';
+                } else if($article->translation && $article->translation->seoUrl) {
                     $pathInfo = $article->translation->seoUrl;
                     $parentId = $article->category_id;
                 }
