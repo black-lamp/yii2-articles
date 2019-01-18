@@ -29,6 +29,34 @@ class ArticleController extends Controller
             'name' => 'keywords',
             'content' => html_entity_decode($articleTranslation->seoKeywords)
         ]);
+        if (!empty($articleTranslation->name)) {
+            $this->view->registerMetaTag([
+                'property' => 'og:title',
+                'content' => html_entity_decode($articleTranslation->name)
+            ]);
+        }
+        if (!empty($articleTranslation->short_text)) {
+            $this->view->registerMetaTag([
+                'property' => 'og:description',
+                'content' => strip_tags(html_entity_decode($articleTranslation->short_text))
+            ]);
+        }
+        if (!empty(\Yii::$app->params['siteName'])) {
+            $this->view->registerMetaTag([
+                'property' => 'og:site_name',
+                'content' => html_entity_decode(\Yii::$app->params['siteName'])
+            ]);
+        }
+        if (!empty($article->thumbnail)) {
+            $this->view->registerMetaTag([
+                'property' => 'og:image',
+                'content' => html_entity_decode(Url::to($article->thumbnail ? '/images/articles/thumbnail/' . $article->thumbnail . '-origin.jpg' : '/img/default.jpg', true))
+            ]);
+            $this->view->registerMetaTag([
+                'property' => 'og:image:secure_url',
+                'content' => html_entity_decode(Url::to($article->thumbnail ? '/images/articles/thumbnail/' . $article->thumbnail . '-origin.jpg' : '/img/default.jpg', true))
+            ]);
+        }
         $this->view->registerLinkTag([
             'rel' => 'canonical',
             'href' => Url::to([
