@@ -78,11 +78,17 @@ $tinyMceConfig = [
                 <i class="glyphicon glyphicon-list"></i>
                 <?= Yii::t('articles', 'Basic') ?>
 
-                <?php if (!empty(Yii::$app->urlManagerFrontend)): ?>
-                    <a href="<?= Yii::$app->urlManagerFrontend->createUrl(['articles/article/index', 'id' => $article->id])?>" class="pull-right" target="_blank">
-                        <i class="fa fa-external-link"></i>
-                    </a>
-                <?php endif; ?>
+                <div class="pull-right">
+                    <?php if (!empty($article->id) && !empty(Yii::$app->urlManagerFrontend)): ?>
+                        <a href="<?= Yii::$app->urlManagerFrontend->createUrl(['articles/article/index', 'id' => $article->id])?>" class="btn btn-info btn-xs" target="_blank">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    <?php endif; ?>
+                    <button type="submit" class="btn btn-primary btn-xs">
+                        <i class="fa fa-save"></i>
+                        <?= Yii::t('articles', 'Save'); ?>
+                    </button>
+                </div>
             </div>
             <div class="panel-body">
                 <?php if(count($languages) > 1): ?>
@@ -186,7 +192,7 @@ $tinyMceConfig = [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), $tinyMceConfig)
+                ])->widget(TinyMce::className(), array_merge($tinyMceConfig, ['options' => ['rows' => 10]]))
                     ->label(Yii::t('articles', 'Short description' ));
                 ?>
                 <?= $form->field($article_translation, 'text', [
@@ -200,7 +206,7 @@ $tinyMceConfig = [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), $tinyMceConfig)
+                ])->widget(TinyMce::className(), array_merge($tinyMceConfig, ['options' => ['rows' => 10]]))
                     ->label(Yii::t('articles', 'Additional description'));
                 ?>
 
@@ -208,7 +214,7 @@ $tinyMceConfig = [
                     'inputOptions' => [
                         'class' => 'form-control'
                     ]
-                ])->widget(TinyMce::className(), $tinyMceConfig)
+                ])->widget(TinyMce::className(), array_merge($tinyMceConfig, ['options' => ['rows' => 10]]))
                     ->label(Yii::t('articles', 'Seo text' ));
                 ?>
 
