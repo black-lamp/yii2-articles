@@ -19,7 +19,7 @@ use yii\widgets\Pjax;
  * @var $categories Category[]
  */
 
-$this->title = Yii::t('articles', 'Edit article');
+$this->title = '[' . $selectedLanguage->lang_id . '] ' . Yii::t('articles', 'Edit article');
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('articles', 'Articles'),
