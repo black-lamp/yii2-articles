@@ -22,6 +22,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-list"></i>
                 <?= Yii::t('articles', 'Articles list') ?>
+
+                <a href="<?= Url::to(['/articles/article/save', 'languageId' => Language::getCurrent()->id]) ?>"
+                   class="btn btn-primary btn-xs pull-right">
+                    <i class="fa fa-plus"></i> <?= Yii::t('articles', 'Add'); ?>
+                </a>
             </div>
             <div class="panel-body">
                 <table class="table table-hover">
@@ -131,10 +136,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         </tbody>
                     <?php endif; ?>
                 </table>
-                <!-- TODO: languageId -->
                 <a href="<?= Url::to(['/articles/article/save', 'languageId' => Language::getCurrent()->id]) ?>"
                    class="btn btn-primary pull-right">
-                    <i class="fa fa-user-plus"></i> <?= Yii::t('articles', 'Add'); ?>
+                    <i class="fa fa-plus"></i> <?= Yii::t('articles', 'Add'); ?>
                 </a>
             </div>
         </div>
