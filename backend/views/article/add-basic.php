@@ -77,6 +77,12 @@ $tinyMceConfig = [
             <div class="panel-heading">
                 <i class="glyphicon glyphicon-list"></i>
                 <?= Yii::t('articles', 'Basic') ?>
+
+                <?php if (!empty(Yii::$app->urlManagerFrontend)): ?>
+                    <a href="<?= Yii::$app->urlManagerFrontend->createUrl(['articles/article/index', 'id' => $article->id])?>" class="pull-right" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="panel-body">
                 <?php if(count($languages) > 1): ?>
