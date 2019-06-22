@@ -23,7 +23,7 @@
     "kartik-v/yii2-widget-datepicker": "*",
     
     "black-lamp/yii2-multi-lang": "^1.0.0",
-    "black-lamp/yii2-seo": "0.1.*"
+    "black-lamp/yii2-seo": "^0.2"
   },
   "autoload": {
     "psr-4": {
