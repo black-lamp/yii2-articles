@@ -2,6 +2,7 @@
 namespace bl\articles\frontend\controllers;
 
 use bl\articles\common\entities\Article;
+use bl\articles\frontend\Module as FrontendModule;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -77,7 +78,9 @@ class ArticleController extends Controller
             }
         }
 
-        $article->updateViewCounter();
+        if ($this->module->params[FrontendModule::COUNT_VIEWS_PARAM]) {
+            $article->updateViewCounter();
+        }
 
         return $this->render($articleView, [
             'article' => $article
